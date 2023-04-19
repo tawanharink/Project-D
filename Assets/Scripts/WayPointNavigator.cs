@@ -10,9 +10,20 @@ public class WayPointNavigator : MonoBehaviour
     public float stoppingDistance = 2f;
     public Waypoint currentWaypoint;
 
+    public float sensorLength;
+
+    private bool trafficAhead;
+    public LayerMask checkedLayer;
+
+    private float maxSpeed;
+
     private void Start()
     {
         car.SetDestination(currentWaypoint.transform.position);
+
+        trafficAhead = false;
+
+        maxSpeed = car.speed;
     }
 
     private void Update()
@@ -64,5 +75,48 @@ public class WayPointNavigator : MonoBehaviour
 
         car.SetDestination(currentWaypoint.transform.position);
         reachedDestination = false;
+    }
+
+    private void FixedUpdate()
+    {
+        Sensors();
+        Brakes();
+    }
+
+    private void Sensors()
+    {
+        RaycastHit hit;
+        Vector3 sensorStartPosition = this.transform.position;
+        Vector3 direction = (currentWaypoint.transform.position - this.transform.position).normalized;
+
+        bool frontCheck = Physics.Raycast(sensorStartPosition, transform.forward, out hit, sensorLength);
+        bool waypointCheck = Physics.Raycast(sensorStartPosition, direction, out hit, sensorLength);
+
+        if (frontCheck || waypointCheck)
+        {
+            trafficAhead = true;
+        }
+        else
+        {
+            trafficAhead = false;
+        }
+
+        Vector3 endPoint = sensorStartPosition + transform.forward * sensorLength;
+        Debug.DrawLine(sensorStartPosition, endPoint, Color.cyan);
+
+        Vector3 endPoint2 = sensorStartPosition + direction * sensorLength;
+        Debug.DrawLine(sensorStartPosition, endPoint2, Color.magenta);
+    }
+
+    private void Brakes()
+    {
+        if (trafficAhead)
+        {
+            car.speed = car.speed - 1.5f * Time.deltaTime;
+        }
+        else
+        {
+            car.speed = maxSpeed;
+        }
     }
 }
