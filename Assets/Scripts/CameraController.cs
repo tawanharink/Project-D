@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,10 +11,17 @@ public class CameraController : MonoBehaviour
 
     public bool isFirstPerson = true;
 
+    public Camera mainCamera;
+    public CinemachineVirtualCamera thirdPersonCamera;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Set the correct initial state for the cameras
+        mainCamera.enabled = isFirstPerson;
+        thirdPersonCamera.enabled = !isFirstPerson;
     }
 
     void Update()
@@ -21,17 +29,16 @@ public class CameraController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V))
         {
             isFirstPerson = !isFirstPerson;
+
+            // Switch the camera's active state when toggling between first and third person
+            mainCamera.enabled = isFirstPerson;
+            thirdPersonCamera.enabled = !isFirstPerson;
         }
 
         if (isFirstPerson)
         {
             FirstPerson();
         }
-        else
-        {
-            ThirdPerson();
-        }
-
     }
 
     void FirstPerson()
@@ -48,10 +55,5 @@ public class CameraController : MonoBehaviour
         yRotation = Mathf.Clamp(yRotation, -150f, 150f);
 
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
-    }
-
-    void ThirdPerson()
-    {
-
     }
 }
