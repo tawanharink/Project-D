@@ -843,6 +843,154 @@ MonoBehaviour:
   brake: 0
   com: {x: 0, y: 0, z: 0}
   body: {fileID: 5972894426509590274}
+  controls:
+    m_Name: Controls
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ed70500f-8e86-40d2-949f-cab0784ba35c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  steeringAction:
+    m_Name: Steering
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 04985d1c-b7c4-4722-b7a7-b4b690bf7834
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: AD
+      m_Id: 8e724ade-0449-4dc3-97c5-16c9684e0105
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Steering
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: dabd59cd-a570-4663-b28a-231820e4964f
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Steering
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 9e53a042-fd8c-475a-9d4a-a4662009b9e3
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Steering
+      m_Flags: 8
+    - m_Name: Gamepad
+      m_Id: af2150e3-2f2f-43f9-9e0f-b220c5386740
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Steering
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: 426cd9ab-1ccf-440b-a29c-36046e43f335
+      m_Path: <Gamepad>/leftStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Steering
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 47be9a90-a29e-48aa-89ed-5de03cb6855d
+      m_Path: <Gamepad>/leftStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Steering
+      m_Flags: 8
+    m_Flags: 0
+  throttleAction:
+    m_Name: Throttle
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 2aded3fa-bf31-4afb-8ff1-f6412d05e394
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: WS
+      m_Id: c0270630-6b47-412f-b018-2cf5e3209817
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Throttle
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: 6b1eaabd-0e05-4cdf-911f-f71bf62e60c3
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Throttle
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 7ae7a052-20f6-480d-bd1a-226240ce4be6
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Throttle
+      m_Flags: 8
+    - m_Name: Gamepad
+      m_Id: 57c12511-18a5-4bfc-ba1a-067f239b7e9b
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Throttle
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: adadc48b-064d-4483-b995-3d968f4d8efa
+      m_Path: <Gamepad>/leftTrigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Throttle
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: dfdfc3f3-d611-4c79-bc58-f408259aa7f6
+      m_Path: <Gamepad>/rightTrigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Throttle
+      m_Flags: 8
+    m_Flags: 0
+  brakeAction:
+    m_Name: Brake
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8a98dbda-091f-49d1-acf7-16990b218097
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b20b4e2c-9a16-417f-bc66-8b38f95f012d
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Brake
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 1cddb36b-cf98-4725-b125-760460ba3ed6
+      m_Path: <Gamepad>/rightShoulder
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Brake
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &5973024272350319801
 GameObject:
   m_ObjectHideFlags: 0
