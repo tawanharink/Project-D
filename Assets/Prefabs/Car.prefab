@@ -114,7 +114,7 @@ MonoBehaviour:
   reachedDestination: 0
   stoppingDistance: 2
   currentWaypoint: {fileID: 0}
-  sensorLength: 0
+  sensorLength: 4
   checkedLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -132,7 +132,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -153,3 +153,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   farCar: {fileID: 0}
+  spawnTraffic: {fileID: 0}

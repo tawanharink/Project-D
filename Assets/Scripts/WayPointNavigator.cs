@@ -28,7 +28,7 @@ public class WayPointNavigator : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(car.transform.position, car.destination) < stoppingDistance)
+        if (Vector3.Distance(car.transform.position, car.destination) <= car.stoppingDistance)
         {
             reachedDestination = true;
         }
@@ -89,13 +89,12 @@ public class WayPointNavigator : MonoBehaviour
         Vector3 sensorStartPosition = this.transform.position;
         Vector3 direction = (currentWaypoint.transform.position - this.transform.position).normalized;
 
-        bool frontCheck = Physics.Raycast(sensorStartPosition, transform.forward, out hit, sensorLength);
-        bool waypointCheck = Physics.Raycast(sensorStartPosition, direction, out hit, sensorLength);
+        bool frontCheck = Physics.Raycast(sensorStartPosition, transform.forward, out hit, sensorLength, checkedLayer);
+        // bool waypointCheck = Physics.Raycast(sensorStartPosition, direction, out hit, sensorLength);
 
-        if (frontCheck || waypointCheck)
+        if (frontCheck)
         {
-            trafficAhead = true;
-        }
+            trafficAhead = true;        }
         else
         {
             trafficAhead = false;
@@ -104,8 +103,8 @@ public class WayPointNavigator : MonoBehaviour
         Vector3 endPoint = sensorStartPosition + transform.forward * sensorLength;
         Debug.DrawLine(sensorStartPosition, endPoint, Color.cyan);
 
-        Vector3 endPoint2 = sensorStartPosition + direction * sensorLength;
-        Debug.DrawLine(sensorStartPosition, endPoint2, Color.magenta);
+        // Vector3 endPoint2 = sensorStartPosition + direction * sensorLength;
+        // Debug.DrawLine(sensorStartPosition, endPoint2, Color.magenta);
     }
 
     private void Brakes()

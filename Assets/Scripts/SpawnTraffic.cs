@@ -9,6 +9,7 @@ public class SpawnTraffic : MonoBehaviour
     [SerializeField] GameObject waypointParent;
 
     [SerializeField] int trafficDensity;
+    [HideInInspector] public int actualTrafficDensity;
     [SerializeField] float spawnDelay;
 
     private Transform traffic;
@@ -20,34 +21,44 @@ public class SpawnTraffic : MonoBehaviour
     [SerializeField] float overlapBoxSize = 1f;
     [SerializeField] LayerMask spawnLayerMask;
 
-    public void Start()
+    void Start()
     {
         traffic = this.transform;
 
-        Invoke("SpawnCar", spawnDelay / trafficDensity);
+        actualTrafficDensity = 0;
+
+        if (actualTrafficDensity < trafficDensity)
+        {
+            StartCoroutine(SpawnCar());
+        }
     }
 
-    private void SpawnCar()
+    IEnumerator SpawnCar()
     {
-        Waypoint waypoint = GetWaypoint();
-
-        if (PositionRaycast(waypoint.transform))
+        if (actualTrafficDensity < trafficDensity)
         {
-            GameObject trafficCar = Instantiate(car, waypoint.transform.position, waypoint.transform.rotation, traffic);
+            Waypoint waypoint = GetWaypoint();
 
-            trafficCar.layer = LayerMask.NameToLayer("Traffic");
+            if (PositionRaycast(waypoint.transform))
+            {
+                GameObject trafficCar = Instantiate(car, waypoint.transform.position, waypoint.transform.rotation, traffic);
 
-            WayPointNavigator navigator = trafficCar.GetComponent<WayPointNavigator>();
-            navigator.currentWaypoint = waypoint;
+                actualTrafficDensity += 1;
 
-            DespawnTraffic despawnTraffic = trafficCar.GetComponent<DespawnTraffic>();
-            despawnTraffic.farCar = farCar;
+                trafficCar.layer = LayerMask.NameToLayer("Traffic");
+
+                WayPointNavigator navigator = trafficCar.GetComponent<WayPointNavigator>();
+                navigator.currentWaypoint = waypoint;
+
+                DespawnTraffic despawnTraffic = trafficCar.GetComponent<DespawnTraffic>();
+                despawnTraffic.farCar = farCar;
+                despawnTraffic.spawnTraffic = GetComponent<SpawnTraffic>();
+            }
         }
 
-        if (traffic.childCount < trafficDensity)
-        {
-            Invoke("SpawnCar", spawnDelay);
-        }
+        yield return new WaitForSeconds(spawnDelay / (trafficDensity + 1 - actualTrafficDensity));
+        StartCoroutine(SpawnCar());
+
     }
 
     bool PositionRaycast(Transform waypoint)
