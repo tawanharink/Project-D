@@ -21821,6 +21821,62 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1775642419}
+    - target: {fileID: 5317952088503454854, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: maxSpeed
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317952088503454854, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: maxSpeedArrowAngle
+      value: -206.673
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317952088503454854, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: minSpeedArrowAngle
+      value: 27.357
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317952088503454855, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317952088503454855, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 811
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317952088503454855, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -107.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317952088503454873, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6a0ce02ba3872414fbacabeb13930721, type: 3}
+    - target: {fileID: 5317952089507886698, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5807
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317952089507886698, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317952089507886698, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317952089507886698, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317952089507886698, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317952089507886698, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -24.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317952089507886698, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5317952089664213717, guid: 57246d1bcdf38394492808b7dd4d9810, type: 3}
       propertyPath: m_Name
       value: Canvas
