@@ -99,7 +99,7 @@ public class WayPointNavigator : MonoBehaviour
         if (frontCheck)
         {
             carDistance = hit.distance;
-            trafficAhead = true;        
+            trafficAhead = true;
         }
         else
         {
