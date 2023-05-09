@@ -38873,7 +38873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 672648545}
   - component: {fileID: 672648546}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: GoogleMapsKaart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81855,7 +81855,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 257
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 5536189dac9c58247b218bac207a8a11, type: 2}
   m_TargetDisplay: 0
@@ -126071,11 +126071,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5974569734043664921, guid: 7c134cbbd4e9631439aff72132aa30e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 63.09
+      value: 60.51
       objectReference: {fileID: 0}
     - target: {fileID: 5974569734043664921, guid: 7c134cbbd4e9631439aff72132aa30e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.09968114
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 5974569734043664921, guid: 7c134cbbd4e9631439aff72132aa30e7, type: 3}
       propertyPath: m_LocalPosition.z
