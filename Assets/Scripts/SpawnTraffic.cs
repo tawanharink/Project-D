@@ -33,7 +33,9 @@ public class SpawnTraffic : MonoBehaviour
 
         if (PositionRaycast(waypoint.transform))
         {
-            GameObject trafficCar = Instantiate(car, waypoint.transform.position, waypoint.transform.rotation, traffic);
+            Vector3 spawnPosition = new Vector3(waypoint.transform.position.x, waypoint.transform.position.y + 1.5f, waypoint.transform.position.z);
+
+            GameObject trafficCar = Instantiate(car, spawnPosition, waypoint.transform.rotation, traffic);
 
             trafficCar.layer = LayerMask.NameToLayer("Traffic");
 
