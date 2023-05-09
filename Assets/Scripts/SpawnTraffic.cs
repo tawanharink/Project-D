@@ -90,7 +90,7 @@ public class SpawnTraffic : MonoBehaviour
         Waypoint[] waypoints = waypointParent.GetComponentsInChildren<Waypoint>();
         Waypoint waypoint = waypoints[Random.Range(0, waypoints.Length)];
 
-        while (nearCar.bounds.Contains(waypoint.transform.position) && !farCar.bounds.Contains(waypoint.transform.position))
+        while (nearCar.bounds.Contains(waypoint.transform.position) && !farCar.bounds.Contains(waypoint.transform.position) && waypoint.branches != null)
         {
             waypoints = waypointParent.GetComponentsInChildren<Waypoint>();
             waypoint = waypoints[Random.Range(0, waypoints.Length)];

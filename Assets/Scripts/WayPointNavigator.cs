@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,12 +15,15 @@ public class WayPointNavigator : MonoBehaviour
 
     private bool trafficAhead;
     public LayerMask checkedLayer;
-
+    private float carDistance;
     private float maxSpeed;
+
 
     private void Start()
     {
         car.SetDestination(currentWaypoint.transform.position);
+
+        car.stoppingDistance = stoppingDistance;
 
         trafficAhead = false;
 
@@ -87,14 +91,16 @@ public class WayPointNavigator : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 sensorStartPosition = this.transform.position;
-        Vector3 direction = (currentWaypoint.transform.position - this.transform.position).normalized;
+        // Vector3 direction = (currentWaypoint.transform.position - this.transform.position).normalized;
 
         bool frontCheck = Physics.Raycast(sensorStartPosition, transform.forward, out hit, sensorLength, checkedLayer);
         // bool waypointCheck = Physics.Raycast(sensorStartPosition, direction, out hit, sensorLength);
 
         if (frontCheck)
         {
-            trafficAhead = true;        }
+            carDistance = hit.distance;
+            trafficAhead = true;        
+        }
         else
         {
             trafficAhead = false;
@@ -111,7 +117,9 @@ public class WayPointNavigator : MonoBehaviour
     {
         if (trafficAhead)
         {
-            car.speed = car.speed - 1.5f * Time.deltaTime;
+            float brakeStrength = (1 - (carDistance / 4)) * 12f;
+            Debug.Log("Distance: " + carDistance + "; Brake strength: " + brakeStrength);
+            car.speed -= brakeStrength * Time.deltaTime;
         }
         else
         {
