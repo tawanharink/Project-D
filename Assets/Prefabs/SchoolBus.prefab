@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7750290943738287039}
   - component: {fileID: 2598795950487231381}
   - component: {fileID: 9157575032036308687}
+  - component: {fileID: 5881617568017554627}
   m_Layer: 0
   m_Name: ThirdPersonCam
   m_TagString: Untagged
@@ -83,6 +84,24 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372039636390295533}
   m_Enabled: 1
+--- !u!114 &5881617568017554627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372039636390295533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac06e66809d0254db2df8746b1ab1c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5974569734043664921}
+  distance: 5
+  xSpeed: 120
+  ySpeed: 120
+  yMinLimit: -20
+  yMaxLimit: 80
 --- !u!1 &3541253167614607716
 GameObject:
   m_ObjectHideFlags: 0
