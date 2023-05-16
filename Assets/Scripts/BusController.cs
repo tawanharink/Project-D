@@ -33,7 +33,7 @@ public class BusController : MonoBehaviour
         body.centerOfMass = com;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Get input values from player
         steering = Input.GetAxis("Horizontal");
