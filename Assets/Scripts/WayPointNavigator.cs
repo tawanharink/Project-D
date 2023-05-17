@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,15 +14,12 @@ public class WayPointNavigator : MonoBehaviour
 
     private bool trafficAhead;
     public LayerMask checkedLayer;
-    private float carDistance;
-    private float maxSpeed;
 
+    private float maxSpeed;
 
     private void Start()
     {
         car.SetDestination(currentWaypoint.transform.position);
-
-        car.stoppingDistance = stoppingDistance;
 
         trafficAhead = false;
 
@@ -32,7 +28,7 @@ public class WayPointNavigator : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(car.transform.position, car.destination) <= car.stoppingDistance)
+        if (Vector3.Distance(car.transform.position, car.destination) < stoppingDistance)
         {
             reachedDestination = true;
         }
@@ -91,14 +87,13 @@ public class WayPointNavigator : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 sensorStartPosition = this.transform.position;
-        // Vector3 direction = (currentWaypoint.transform.position - this.transform.position).normalized;
+        Vector3 direction = (currentWaypoint.transform.position - this.transform.position).normalized;
 
         bool frontCheck = Physics.Raycast(sensorStartPosition, transform.forward, out hit, sensorLength, checkedLayer);
-        // bool waypointCheck = Physics.Raycast(sensorStartPosition, direction, out hit, sensorLength);
+        bool waypointCheck = Physics.Raycast(sensorStartPosition, direction, out hit, sensorLength, checkedLayer);
 
-        if (frontCheck)
+        if (frontCheck || waypointCheck)
         {
-            carDistance = hit.distance;
             trafficAhead = true;
         }
         else
@@ -109,17 +104,15 @@ public class WayPointNavigator : MonoBehaviour
         Vector3 endPoint = sensorStartPosition + transform.forward * sensorLength;
         Debug.DrawLine(sensorStartPosition, endPoint, Color.cyan);
 
-        // Vector3 endPoint2 = sensorStartPosition + direction * sensorLength;
-        // Debug.DrawLine(sensorStartPosition, endPoint2, Color.magenta);
+        Vector3 endPoint2 = sensorStartPosition + direction * sensorLength;
+        Debug.DrawLine(sensorStartPosition, endPoint2, Color.magenta);
     }
 
     private void Brakes()
     {
         if (trafficAhead)
         {
-            float brakeStrength = (1 - (carDistance / 4)) * 12f;
-            Debug.Log("Distance: " + carDistance + "; Brake strength: " + brakeStrength);
-            car.speed -= brakeStrength * Time.deltaTime;
+            car.speed = car.speed - 3.5f * Time.deltaTime;
         }
         else
         {
