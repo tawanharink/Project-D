@@ -8,7 +8,7 @@ public class SpawnTraffic : MonoBehaviour
 
     [SerializeField] GameObject waypointParent;
 
-    [SerializeField] int trafficDensity;
+    [SerializeField] public int trafficDensity;
     [SerializeField] float spawnDelay;
 
     private Transform traffic;
