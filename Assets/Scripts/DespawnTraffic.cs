@@ -10,10 +10,10 @@ public class DespawnTraffic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!farCar.bounds.Contains(this.gameObject.transform.position))
-        {
-            spawnTraffic.actualTrafficDensity -= 1;
-            Destroy(this.gameObject);
-        }
+        //if (!farCar.bounds.Contains(this.gameObject.transform.position))
+        //{
+        //    spawnTraffic.actualTrafficDensity -= 1;
+        //    Destroy(this.gameObject);
+        //}
     }
 }
