@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7495443279060062592, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8149568199777138782, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
       propertyPath: m_Layer
@@ -150,28 +150,31 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3311311803080157842, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
   m_PrefabInstance: {fileID: 5103039417754662095}
   m_PrefabAsset: {fileID: 0}
---- !u!195 &-8878475511329344620
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!54 &3374474453900846415 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 7495443279060062592, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
+  m_PrefabInstance: {fileID: 5103039417754662095}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7720726507797323357}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 2
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+--- !u!146 &7161689254267407433 stripped
+WheelCollider:
+  m_CorrespondingSourceObject: {fileID: 2716459193614891142, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
+  m_PrefabInstance: {fileID: 5103039417754662095}
+  m_PrefabAsset: {fileID: 0}
+--- !u!146 &314971172518125230 stripped
+WheelCollider:
+  m_CorrespondingSourceObject: {fileID: 4795950753765878369, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
+  m_PrefabInstance: {fileID: 5103039417754662095}
+  m_PrefabAsset: {fileID: 0}
+--- !u!146 &7887936941379631419 stripped
+WheelCollider:
+  m_CorrespondingSourceObject: {fileID: 3145262460232535540, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
+  m_PrefabInstance: {fileID: 5103039417754662095}
+  m_PrefabAsset: {fileID: 0}
+--- !u!146 &5223429399262309916 stripped
+WheelCollider:
+  m_CorrespondingSourceObject: {fileID: 1057494946909100755, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
+  m_PrefabInstance: {fileID: 5103039417754662095}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &417698326124175115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749979fe18c4e48418a83aef7f908c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  car: {fileID: -8878475511329344620}
+  rb: {fileID: 3374474453900846415}
   reachedDestination: 0
   stoppingDistance: 2
   currentWaypoint: {fileID: 0}
@@ -192,6 +195,17 @@ MonoBehaviour:
   checkedLayer:
     serializedVersion: 2
     m_Bits: 64
+  maxSpeed: 5
+  torque: 0.5
+  steeringSpeed: 50
+  movementVector: {x: 0, y: 0}
+  frontRight: {fileID: 314971172518125230}
+  frontLeft: {fileID: 7161689254267407433}
+  backRight: {fileID: 5223429399262309916}
+  backLeft: {fileID: 7887936941379631419}
+  acceleration: 50
+  brakingForce: 300
+  maxTurnAngle: 15
 --- !u!114 &2882799443323811112
 MonoBehaviour:
   m_ObjectHideFlags: 0

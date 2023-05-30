@@ -18,9 +18,6 @@ public class WayPointNavigator : MonoBehaviour
     private float carDistance;
 
     [SerializeField] private float maxSpeed = 5;
-    //[SerializeField] private float acceleration = 10;
-    //[SerializeField] private float deceleration = 10;
-    //[SerializeField] private float velPower = 1;
     [SerializeField] private float torque = 0.5f;
     [SerializeField] private float steeringSpeed;
     private float speed;
@@ -42,6 +39,8 @@ public class WayPointNavigator : MonoBehaviour
     private float currentAcceleration = 0f;
     private float currentBrakeForce = 0f;
     private float currentTurnAngle;
+
+    private bool turning;
 
 
     private void Start()
@@ -111,11 +110,27 @@ public class WayPointNavigator : MonoBehaviour
     {
         Vector3 direction = (destination - this.transform.position).normalized;
         Quaternion steeringDirection = Quaternion.LookRotation(direction);
+
+        //Debug.Log("current direction y: " + transform.rotation.y + "; Desired direction y: " + steeringDirection.y);
+
+        //if (Mathf.Abs(this.transform.rotation.y - steeringDirection.y) < 0.0000005f)
+        //{
+        //    Debug.Log("Turning");
+        //    turning = true;
+        //}
+        //else
+        //{
+        //    Debug.Log("Straight ahead");
+        //    turning= false;
+        //}
         steeringDirection.x = 0;
         steeringDirection.z = 0;
 
         //transform.rotation = steeringDirection;
-        transform.rotation = Quaternion.RotateTowards(this.transform.rotation, steeringDirection, steeringSpeed * Time.deltaTime);
+        if (rb.velocity.x >= 0.05f)
+        {
+            transform.rotation = Quaternion.RotateTowards(this.transform.rotation, steeringDirection, steeringSpeed * Time.deltaTime);
+        }
     }
 
     private void FixedUpdate()
@@ -131,7 +146,6 @@ public class WayPointNavigator : MonoBehaviour
             if (trafficAhead)
             {
                 currentBrakeForce = brakingForce / (carDistance / sensorLength);
-                Debug.Log("traffic ahead, braking: " + currentBrakeForce);
             }
             else
             {
@@ -140,22 +154,30 @@ public class WayPointNavigator : MonoBehaviour
             currentAcceleration = 0f;
             speed = 0f;
         }
+        else if (turning)
+        {
+            speed = maxSpeed / 2;
+            float speedDif = speed - rb.velocity.x;
+            if (speedDif < 0) 
+            { 
+                speedDif = 0;
+                currentBrakeForce = brakingForce;
+                currentAcceleration = 0;
+            }
+            else
+            {
+                currentBrakeForce = 0f;
+                currentAcceleration = (speedDif * acceleration) / 2;
+            }
+        }
         else
         {
             speed = maxSpeed;
             currentBrakeForce = 0f;
-            //currentAcceleration = acceleration;
             float speedDif = speed - rb.velocity.x;
             currentAcceleration = speedDif * acceleration;
 
         }
-
-        //rb.velocity = transform.forward * speed;
-
-        //float speedDif = speed - rb.velocity.x;
-        //float accelRate = (Mathf.Abs(speed) > 0.01f) ? acceleration : deceleration;
-        //float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPower) * Mathf.Sign(speedDif);
-        //rb.AddForce(movement * transform.forward);
 
         // Apply acceleration to front wheels
         frontRight.motorTorque = currentAcceleration;
