@@ -89,8 +89,8 @@ public class WayPointNavigator : MonoBehaviour
         Vector3 sensorStartPosition = this.transform.position;
         Vector3 direction = (currentWaypoint.transform.position - this.transform.position).normalized;
 
-        bool frontCheck = Physics.Raycast(sensorStartPosition, transform.forward, out hit, sensorLength);
-        bool waypointCheck = Physics.Raycast(sensorStartPosition, direction, out hit, sensorLength);
+        bool frontCheck = Physics.Raycast(sensorStartPosition, transform.forward, out hit, sensorLength, checkedLayer);
+        bool waypointCheck = Physics.Raycast(sensorStartPosition, direction, out hit, sensorLength, checkedLayer);
 
         if (frontCheck || waypointCheck)
         {
@@ -112,7 +112,7 @@ public class WayPointNavigator : MonoBehaviour
     {
         if (trafficAhead)
         {
-            car.speed = car.speed - 1.5f * Time.deltaTime;
+            car.speed = car.speed - 3.5f * Time.deltaTime;
         }
         else
         {

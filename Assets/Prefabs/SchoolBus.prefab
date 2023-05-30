@@ -694,7 +694,7 @@ GameObject:
   - component: {fileID: 5912656881582350771}
   - component: {fileID: 5972894426509590274}
   - component: {fileID: 5972894426509590275}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SchoolBus
   m_TagString: Car
   m_Icon: {fileID: 0}
