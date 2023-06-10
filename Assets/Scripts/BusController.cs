@@ -13,7 +13,7 @@ public class BusController : MonoBehaviour
     [SerializeField] private WheelCollider rearLeftWheelCollider;
     [SerializeField] private WheelCollider rearRightWheelCollider;
     public float maxSteerAngle = 30f;
-    public float engineTorque = 2000f;
+    public float engineTorque = 500f;
     public float brakingTorque = 2000f;
     public float engineBrakingTorque = 600.0f;
     public float currentSpeed;
