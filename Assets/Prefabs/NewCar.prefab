@@ -132,6 +132,10 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7495443279060062592, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495443279060062592, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
@@ -195,17 +199,15 @@ MonoBehaviour:
   checkedLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxSpeed: 5
-  torque: 0.5
-  steeringSpeed: 50
+  maxSpeed: 4
+  steeringSpeed: 60
   movementVector: {x: 0, y: 0}
   frontRight: {fileID: 314971172518125230}
   frontLeft: {fileID: 7161689254267407433}
   backRight: {fileID: 5223429399262309916}
   backLeft: {fileID: 7887936941379631419}
-  acceleration: 50
-  brakingForce: 300
-  maxTurnAngle: 15
+  acceleration: 100
+  brakingForce: 800
 --- !u!114 &2882799443323811112
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,7 +18,6 @@ public class WayPointNavigator : MonoBehaviour
     private float carDistance;
 
     [SerializeField] private float maxSpeed = 5;
-    [SerializeField] private float torque = 0.5f;
     [SerializeField] private float steeringSpeed;
     private float speed;
     private Vector3 angleVelocity;
@@ -34,11 +33,9 @@ public class WayPointNavigator : MonoBehaviour
 
     public float acceleration = 500f;
     public float brakingForce = 300f;
-    public float maxTurnAngle = 15f;
 
     private float currentAcceleration = 0f;
     private float currentBrakeForce = 0f;
-    private float currentTurnAngle;
 
     private bool turning;
 
@@ -81,7 +78,6 @@ public class WayPointNavigator : MonoBehaviour
                 MoveToNextWaypoint();
             }
         }
-        Steer();
     }
 
     private void MoveToNextWaypoint()
@@ -106,37 +102,11 @@ public class WayPointNavigator : MonoBehaviour
         reachedDestination = false;
     }
 
-    private void Steer()
-    {
-        Vector3 direction = (destination - this.transform.position).normalized;
-        Quaternion steeringDirection = Quaternion.LookRotation(direction);
-
-        //Debug.Log("current direction y: " + transform.rotation.y + "; Desired direction y: " + steeringDirection.y);
-
-        //if (Mathf.Abs(this.transform.rotation.y - steeringDirection.y) < 0.0000005f)
-        //{
-        //    Debug.Log("Turning");
-        //    turning = true;
-        //}
-        //else
-        //{
-        //    Debug.Log("Straight ahead");
-        //    turning= false;
-        //}
-        steeringDirection.x = 0;
-        steeringDirection.z = 0;
-
-        //transform.rotation = steeringDirection;
-        if (rb.velocity.x >= 0.05f)
-        {
-            transform.rotation = Quaternion.RotateTowards(this.transform.rotation, steeringDirection, steeringSpeed * Time.deltaTime);
-        }
-    }
-
     private void FixedUpdate()
     {
         Drive();
         Sensors();
+        Steer();
     }
 
     public void Drive()
@@ -157,7 +127,7 @@ public class WayPointNavigator : MonoBehaviour
         else if (turning)
         {
             speed = maxSpeed / 2;
-            float speedDif = speed - rb.velocity.x;
+            float speedDif = speed - rb.velocity.magnitude;
             if (speedDif < 0) 
             { 
                 speedDif = 0;
@@ -174,9 +144,8 @@ public class WayPointNavigator : MonoBehaviour
         {
             speed = maxSpeed;
             currentBrakeForce = 0f;
-            float speedDif = speed - rb.velocity.x;
+            float speedDif = speed - rb.velocity.magnitude;
             currentAcceleration = speedDif * acceleration;
-
         }
 
         // Apply acceleration to front wheels
@@ -210,5 +179,26 @@ public class WayPointNavigator : MonoBehaviour
 
         Vector3 endPoint = sensorStartPosition + transform.forward * sensorLength;
         Debug.DrawLine(sensorStartPosition, endPoint, Color.cyan);
+    }
+
+    private void Steer()
+    {
+        Vector3 direction = (destination - this.transform.position).normalized;
+        Quaternion steeringDirection = Quaternion.LookRotation(direction);
+
+        if (Vector3.Dot(this.transform.forward, direction) < 0.8f)
+        {
+            turning = true;
+        }
+        else
+        {
+            turning = false;
+        }
+
+        if (rb.velocity.magnitude >= 0.15f && !isStopped)
+        {
+            Quaternion newRotation = Quaternion.RotateTowards(this.transform.rotation, steeringDirection, steeringSpeed * Time.deltaTime);
+            rb.MoveRotation(newRotation);
+        }
     }
 }
