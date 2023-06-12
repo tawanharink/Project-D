@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/ARCADE - FREE Racing Car/Prefabs (Meshes Only)/Free Racing Car Red Variant.prefab.meta
 guid: a82f70a5f0178974093910fc6fd84c38
+========
+guid: 98c57f100a7d7684dba02b8725bbc5d8
+>>>>>>>> minimap:Assets/ARCADE - FREE Racing Car/Prefabs (Meshes Only)/Free Racing Car Purple Variant.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

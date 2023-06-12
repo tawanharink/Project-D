@@ -65,15 +65,11 @@ public class TrafficLight : MonoBehaviour
                 state = 2;
             }
         }
-        else // If there's no car in the collider
+        else
         {
             timer += Time.deltaTime;
 
-            if (state == 0 && timer < greenLightDuration) // If the traffic light is green and the green light duration has not elapsed
-            {
-                // Do nothing and let the green light stay on
-            }
-            else if (state == 0 && timer >= greenLightDuration) // If the traffic light is green and the green light duration has elapsed
+            if (state == 0 && timer >= greenLightDuration) // If the traffic light is green and the green light duration has elapsed
             {
                 timer = 0f;
                 greenLight.SetActive(false);

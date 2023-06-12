@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,6 +38,7 @@ public class WayPointNavigator : MonoBehaviour
 
     private bool turning;
 
+    private float maxSpeed;
 
     private void Start()
     {
@@ -167,9 +167,8 @@ public class WayPointNavigator : MonoBehaviour
 
         bool frontCheck = Physics.Raycast(sensorStartPosition, transform.forward, out hit, sensorLength, checkedLayer);
 
-        if (frontCheck)
+        if (frontCheck || waypointCheck)
         {
-            carDistance = hit.distance;
             trafficAhead = true;
         }
         else
