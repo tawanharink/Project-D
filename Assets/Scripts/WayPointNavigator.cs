@@ -38,8 +38,6 @@ public class WayPointNavigator : MonoBehaviour
 
     private bool turning;
 
-    private float maxSpeed;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -167,7 +165,7 @@ public class WayPointNavigator : MonoBehaviour
 
         bool frontCheck = Physics.Raycast(sensorStartPosition, transform.forward, out hit, sensorLength, checkedLayer);
 
-        if (frontCheck || waypointCheck)
+        if (frontCheck)
         {
             trafficAhead = true;
         }

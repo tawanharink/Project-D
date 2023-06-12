@@ -175,17 +175,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7495443279060062592, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
 --- !u!1 &7720726507797323357 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3311311803080157842, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
-  m_PrefabInstance: {fileID: 5103039417754662095}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &3374474453900846415 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 7495443279060062592, guid: 133308cdb8794744caaef026bde9e1f0, type: 3}
   m_PrefabInstance: {fileID: 5103039417754662095}
   m_PrefabAsset: {fileID: 0}
 --- !u!146 &7161689254267407433 stripped
@@ -220,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749979fe18c4e48418a83aef7f908c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 3374474453900846415}
+  rb: {fileID: 0}
   reachedDestination: 0
   stoppingDistance: 2
   currentWaypoint: {fileID: 0}
