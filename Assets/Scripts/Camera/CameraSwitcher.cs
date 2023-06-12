@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraSwitcher : MonoBehaviour
 {
@@ -6,6 +7,15 @@ public class CameraSwitcher : MonoBehaviour
     public GameObject thirdPersonCam;
 
     private int activeCam; // 0 = FirstPersonCam, 1 = ThirdPersonCam
+    public InputAction switchCameraAction;
+
+    void Awake()
+    {
+        // Initialize new input system
+        // switchCameraAction = new InputAction("SwitchCamera", binding: "<keyboard>/c");
+        switchCameraAction.performed += _ => SwitchCamera(); // trigger switch camera on performed
+        switchCameraAction.Enable(); // enable the input action
+    }
 
     void Start()
     {
@@ -13,15 +23,6 @@ public class CameraSwitcher : MonoBehaviour
         activeCam = 0;
         firstPersonCam.SetActive(true);
         thirdPersonCam.SetActive(false);
-    }
-
-    void Update()
-    {
-        // Check for input to switch cameras (e.g., pressing the 'C' key)
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            SwitchCamera();
-        }
     }
 
     void SwitchCamera()
@@ -38,5 +39,10 @@ public class CameraSwitcher : MonoBehaviour
             firstPersonCam.SetActive(false);
             thirdPersonCam.SetActive(true);
         }
+    }
+
+    void OnDestroy()
+    {
+        switchCameraAction.Disable(); // always disable input actions when not needed
     }
 }
