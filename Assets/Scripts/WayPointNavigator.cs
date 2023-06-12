@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class WayPointNavigator : MonoBehaviour
 {
-    [SerializeField] NavMeshAgent car;
+    [SerializeField] Rigidbody rb;
     public bool reachedDestination = false;
     public float stoppingDistance = 2f;
     public Waypoint currentWaypoint;
@@ -14,21 +14,44 @@ public class WayPointNavigator : MonoBehaviour
 
     private bool trafficAhead;
     public LayerMask checkedLayer;
+    private float carDistance;
 
-    private float maxSpeed;
+    [SerializeField] private float maxSpeed = 5;
+    [SerializeField] private float steeringSpeed;
+    private float speed;
+    private Vector3 angleVelocity;
+
+    [SerializeField] private Vector2 movementVector;
+    private Vector3 destination;
+    private bool isStopped;
+
+    [SerializeField] WheelCollider frontRight;
+    [SerializeField] WheelCollider frontLeft;
+    [SerializeField] WheelCollider backRight;
+    [SerializeField] WheelCollider backLeft;
+
+    public float acceleration = 500f;
+    public float brakingForce = 300f;
+
+    private float currentAcceleration = 0f;
+    private float currentBrakeForce = 0f;
+
+    private bool turning;
 
     private void Start()
     {
-        car.SetDestination(currentWaypoint.transform.position);
+        rb = GetComponent<Rigidbody>();
+
+        destination = currentWaypoint.transform.position;
 
         trafficAhead = false;
 
-        maxSpeed = car.speed;
+        angleVelocity = new Vector3(0, 30, 0);
     }
 
     private void Update()
     {
-        if (Vector3.Distance(car.transform.position, car.destination) < stoppingDistance)
+        if (Vector3.Distance(this.transform.position, destination) <= stoppingDistance)
         {
             reachedDestination = true;
         }
@@ -39,17 +62,17 @@ public class WayPointNavigator : MonoBehaviour
             {
                 if (currentWaypoint.trafficLight.redLight.activeSelf || currentWaypoint.trafficLight.yellowLight.activeSelf)
                 {
-                    car.isStopped = true;
+                    isStopped = true;
                 }
                 else
                 {
-                    car.isStopped = false;
+                    isStopped = false;
                     MoveToNextWaypoint();
                 }
             }
             else
             {
-                car.isStopped = false;
+                isStopped = false;
                 MoveToNextWaypoint();
             }
         }
@@ -73,26 +96,76 @@ public class WayPointNavigator : MonoBehaviour
             currentWaypoint = currentWaypoint.nextWaypoint;
         }
 
-        car.SetDestination(currentWaypoint.transform.position);
+        destination = currentWaypoint.transform.position;
         reachedDestination = false;
     }
 
     private void FixedUpdate()
     {
+        Drive();
         Sensors();
-        Brakes();
+        Steer();
+    }
+
+    public void Drive()
+    {
+        if (isStopped || trafficAhead)
+        {
+            if (trafficAhead)
+            {
+                currentBrakeForce = brakingForce / (carDistance / sensorLength);
+            }
+            else
+            {
+                currentBrakeForce = brakingForce;
+            }
+            currentAcceleration = 0f;
+            speed = 0f;
+        }
+        else if (turning)
+        {
+            speed = maxSpeed / 2;
+            float speedDif = speed - rb.velocity.magnitude;
+            if (speedDif < 0) 
+            { 
+                speedDif = 0;
+                currentBrakeForce = brakingForce;
+                currentAcceleration = 0;
+            }
+            else
+            {
+                currentBrakeForce = 0f;
+                currentAcceleration = (speedDif * acceleration) / 2;
+            }
+        }
+        else
+        {
+            speed = maxSpeed;
+            currentBrakeForce = 0f;
+            float speedDif = speed - rb.velocity.magnitude;
+            currentAcceleration = speedDif * acceleration;
+        }
+
+        // Apply acceleration to front wheels
+        frontRight.motorTorque = currentAcceleration;
+        frontLeft.motorTorque = currentAcceleration;
+
+        // Apply braking force to all wheels
+        frontRight.brakeTorque = currentBrakeForce;
+        frontLeft.brakeTorque = currentBrakeForce;
+        backRight.brakeTorque = currentBrakeForce;
+        backLeft.brakeTorque = currentBrakeForce;
     }
 
     private void Sensors()
     {
         RaycastHit hit;
         Vector3 sensorStartPosition = this.transform.position;
-        Vector3 direction = (currentWaypoint.transform.position - this.transform.position).normalized;
+        sensorStartPosition.y = sensorStartPosition.y + .25f;
 
         bool frontCheck = Physics.Raycast(sensorStartPosition, transform.forward, out hit, sensorLength, checkedLayer);
-        bool waypointCheck = Physics.Raycast(sensorStartPosition, direction, out hit, sensorLength, checkedLayer);
 
-        if (frontCheck || waypointCheck)
+        if (frontCheck)
         {
             trafficAhead = true;
         }
@@ -103,20 +176,26 @@ public class WayPointNavigator : MonoBehaviour
 
         Vector3 endPoint = sensorStartPosition + transform.forward * sensorLength;
         Debug.DrawLine(sensorStartPosition, endPoint, Color.cyan);
-
-        Vector3 endPoint2 = sensorStartPosition + direction * sensorLength;
-        Debug.DrawLine(sensorStartPosition, endPoint2, Color.magenta);
     }
 
-    private void Brakes()
+    private void Steer()
     {
-        if (trafficAhead)
+        Vector3 direction = (destination - this.transform.position).normalized;
+        Quaternion steeringDirection = Quaternion.LookRotation(direction);
+
+        if (Vector3.Dot(this.transform.forward, direction) < 0.8f)
         {
-            car.speed = car.speed - 3.5f * Time.deltaTime;
+            turning = true;
         }
         else
         {
-            car.speed = maxSpeed;
+            turning = false;
+        }
+
+        if (rb.velocity.magnitude >= 0.15f && !isStopped)
+        {
+            Quaternion newRotation = Quaternion.RotateTowards(this.transform.rotation, steeringDirection, steeringSpeed * Time.deltaTime);
+            rb.MoveRotation(newRotation);
         }
     }
 }
