@@ -16,6 +16,7 @@ public class TruckController : MonoBehaviour
     public float brakingTorque = 2000f;
     public float engineBrakingTorque = 600.0f;
     public float currentSpeed;
+    public float maxSpeed = 5;
 
     private float steering;
     private float throttle;
@@ -52,12 +53,6 @@ public class TruckController : MonoBehaviour
             wheel.steerAngle = steering * maxSteerAngle;
         }
 
-        //// Set engine torque for rear wheels
-        //foreach (WheelCollider wheel in rearWheels)
-        //{
-        //    wheel.motorTorque = throttle * engineTorque;
-        //}
-
         // Apply brake torque to all wheels
         foreach (WheelCollider wheel in frontWheels)
         {
@@ -75,7 +70,16 @@ public class TruckController : MonoBehaviour
             wheel.brakeTorque = (brake + engineBrake);// * Time.deltaTime;
         }
 
-        // Calculate current speed of bus
+        // Calculate current speed of truck
         currentSpeed = GetComponent<Rigidbody>().velocity.magnitude * 3.6f; // Convert from m/s to km/h
+
+        // Limit speed of truck
+        if (currentSpeed > maxSpeed)
+        {
+            foreach (WheelCollider wheel in rearWheels)
+            {
+                wheel.motorTorque = 0f;
+            }
+        }
     }
 }
