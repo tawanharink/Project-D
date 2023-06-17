@@ -1525,19 +1525,19 @@ MonoBehaviour:
   mouseSensitivity: 1
   controllerSensitivity: 100
   lookAction:
-    m_Name: 
+    m_Name: Look
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 0e66daa4-37fa-4097-8481-95bce1bb8492
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
   rightStickAction:
-    m_Name: 
+    m_Name: Right Stick
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 831d5948-5056-4364-99c5-4a3dbdd32cc3
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -1706,10 +1706,10 @@ MonoBehaviour:
   firstPersonCam: {fileID: 6432054523141477933}
   thirdPersonCam: {fileID: 372039636390295533}
   switchCameraAction:
-    m_Name: 
+    m_Name: Switch Camera
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 07ba07fb-2267-4394-a7f6-baa28dc50a54
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
