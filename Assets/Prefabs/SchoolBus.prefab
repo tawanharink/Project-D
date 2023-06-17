@@ -144,8 +144,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 25, y: 5, z: 110}
-  m_Center: {x: 0, y: 2.5, z: 30}
+  m_Size: {x: 40, y: 6.5, z: 200}
+  m_Center: {x: 0, y: 2.5, z: 75}
 --- !u!1 &3629557303779124876
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,8 +188,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 150
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 200
+  m_Center: {x: 0, y: 0, z: 20}
 --- !u!1 &4584680023744185064
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,6 +942,7 @@ MonoBehaviour:
   brakingTorque: 500
   engineBrakingTorque: 150
   currentSpeed: 0
+  maxSpeed: 5
   brake: 0
   com: {x: 0, y: 0, z: 0}
   body: {fileID: 5972894426509590274}
@@ -1521,7 +1522,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1866b633248ef9a4d904749e3d049ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 400
+  mouseSensitivity: 1
+  controllerSensitivity: 100
+  lookAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  rightStickAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &6432054523581142490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,6 +1705,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstPersonCam: {fileID: 6432054523141477933}
   thirdPersonCam: {fileID: 372039636390295533}
+  switchCameraAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &6432054523965295878
 GameObject:
   m_ObjectHideFlags: 0
