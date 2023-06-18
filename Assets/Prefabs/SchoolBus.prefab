@@ -100,7 +100,7 @@ MonoBehaviour:
   distance: 5
   xSpeed: 120
   ySpeed: 120
-  yMinLimit: -20
+  yMinLimit: 5
   yMaxLimit: 80
 --- !u!1 &3541253167614607716
 GameObject:

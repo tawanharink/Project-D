@@ -3,25 +3,25 @@ using UnityEngine.InputSystem;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public Transform target; // The vehicle you want the camera to follow
-    public float distance = 5.0f; // Distance from the vehicle
-    public float xSpeed = 120.0f; // Horizontal rotation speed
-    public float ySpeed = 120.0f; // Vertical rotation speed
+    public Transform target;
+    public float distance = 5.0f;
+    public float xSpeed = 120.0f;
+    public float ySpeed = 120.0f;
+    public float mouseSensitivity = 0.1f; // Add a sensitivity scaling factor for the mouse
 
-    public float yMinLimit = -20f; // Minimum vertical angle
-    public float yMaxLimit = 80f; // Maximum vertical angle
+    public float yMinLimit = 5f;
+    public float yMaxLimit = 80f;
 
     private float x = 0.0f;
     private float y = 0.0f;
 
-    private InputAction lookAction; // Mouse Look
-    private InputAction rightStickAction; // Controller Look
+    private InputAction lookAction;
+    private InputAction rightStickAction;
 
     void Awake()
     {
-        // Mouse look action
         lookAction = new InputAction("Look", binding: "<Mouse>/delta");
-        lookAction.performed += ctx => RotateCamera(ctx.ReadValue<Vector2>());
+        lookAction.performed += ctx => RotateCamera(ctx.ReadValue<Vector2>() * mouseSensitivity); // Apply the mouse sensitivity scaling factor here
         lookAction.Enable();
 
         rightStickAction = new InputAction("RightStickLook", binding: "<Gamepad>/rightStick");
@@ -69,7 +69,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void OnDestroy()
     {
-        lookAction.Disable(); // always disable input actions when not needed
-        rightStickAction.Disable(); // disable the controller look action as well
+        lookAction.Disable();
+        rightStickAction.Disable();
     }
 }
