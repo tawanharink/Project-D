@@ -19,7 +19,6 @@ public class WayPointNavigator : MonoBehaviour
     [SerializeField] private float maxSpeed = 5;
     [SerializeField] private float steeringSpeed;
     private float speed;
-    private Vector3 angleVelocity;
 
     [SerializeField] private Vector2 movementVector;
     private Vector3 destination;
@@ -45,8 +44,6 @@ public class WayPointNavigator : MonoBehaviour
         destination = currentWaypoint.transform.position;
 
         trafficAhead = false;
-
-        angleVelocity = new Vector3(0, 30, 0);
     }
 
     private void Update()
