@@ -22,7 +22,7 @@ public class Speedometer : MonoBehaviour
     {
         // 3.6f to convert in kilometers
         // ** The speed must be clamped by the car controller **
-        speed = target.velocity.magnitude * 3.6f;
+        speed = (target.velocity.magnitude * 3.6f) * 3.0f;
 
         if (speedLabel != null)
             speedLabel.text = ((int)speed) + " km/h";
