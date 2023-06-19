@@ -3,25 +3,25 @@ using UnityEngine.InputSystem;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public Transform target;
-    public float distance = 5.0f;
-    public float xSpeed = 120.0f;
-    public float ySpeed = 120.0f;
-    public float mouseSensitivity = 0.1f; // Add a sensitivity scaling factor for the mouse
+    public Transform target; // Het object waar de camera naar kijkt
+    public float distance = 5.0f; // Afstand van de camera tot het target
+    public float xSpeed = 120.0f; // Snelheid waarmee de camera om het target heen draait
+    public float ySpeed = 120.0f; 
+    public float mouseSensitivity = 0.1f; // Factor waarmee de muis input wordt vermenigvuldigd (voor sensitivity)
 
-    public float yMinLimit = 5f;
-    public float yMaxLimit = 80f;
+    public float yMinLimit = 5f; // Minimale hoek waarmee de camera om het target heen kan draaien (verticaal)
+    public float yMaxLimit = 80f; // Maximale hoek waarmee de camera om het target heen kan draaien
 
-    private float x = 0.0f;
+    private float x = 0.0f; // Huidige rotatie van de camera, gebruikt om de camera te laten roteren
     private float y = 0.0f;
 
-    private InputAction lookAction;
-    private InputAction rightStickAction;
+    private InputAction lookAction; // Input action voor muis
+    private InputAction rightStickAction; // Input action voor controller
 
     void Awake()
     {
         lookAction = new InputAction("Look", binding: "<Mouse>/delta");
-        lookAction.performed += ctx => RotateCamera(ctx.ReadValue<Vector2>() * mouseSensitivity); // Apply the mouse sensitivity scaling factor here
+        lookAction.performed += ctx => RotateCamera(ctx.ReadValue<Vector2>() * mouseSensitivity);
         lookAction.Enable();
 
         rightStickAction = new InputAction("RightStickLook", binding: "<Gamepad>/rightStick");
