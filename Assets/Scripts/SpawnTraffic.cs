@@ -38,23 +38,26 @@ public class SpawnTraffic : MonoBehaviour
         if (actualTrafficDensity < trafficDensity)
         {
             Waypoint waypoint = GetWaypoint();
-
-            if (PositionRaycast(waypoint.transform))
+            if (waypoint != null)
             {
-                Vector3 spawnPosition = new Vector3(waypoint.transform.position.x, waypoint.transform.position.y + .1f, waypoint.transform.position.z);
-                GameObject trafficCar = Instantiate(car, spawnPosition, waypoint.transform.rotation, traffic);
+                if (PositionRaycast(waypoint.transform))
+                {
+                    Vector3 spawnPosition = new Vector3(waypoint.transform.position.x, waypoint.transform.position.y + .1f, waypoint.transform.position.z);
+                    GameObject trafficCar = Instantiate(car, spawnPosition, waypoint.transform.rotation, traffic);
 
-                actualTrafficDensity += 1;
+                    actualTrafficDensity += 1;
 
-                trafficCar.layer = LayerMask.NameToLayer("Traffic");
+                    trafficCar.layer = LayerMask.NameToLayer("Traffic");
 
-                WayPointNavigator navigator = trafficCar.GetComponent<WayPointNavigator>();
-                navigator.currentWaypoint = waypoint;
+                    WayPointNavigator navigator = trafficCar.GetComponent<WayPointNavigator>();
+                    navigator.currentWaypoint = waypoint;
 
-                DespawnTraffic despawnTraffic = trafficCar.GetComponent<DespawnTraffic>();
-                despawnTraffic.farCar = farCar;
-                despawnTraffic.spawnTraffic = GetComponent<SpawnTraffic>();
+                    DespawnTraffic despawnTraffic = trafficCar.GetComponent<DespawnTraffic>();
+                    despawnTraffic.farCar = farCar;
+                    despawnTraffic.spawnTraffic = GetComponent<SpawnTraffic>();
+                }
             }
+            
         }
 
         yield return new WaitForSeconds(spawnDelay / (trafficDensity + 1 - actualTrafficDensity));
@@ -91,12 +94,13 @@ public class SpawnTraffic : MonoBehaviour
         Waypoint[] waypoints = waypointParent.GetComponentsInChildren<Waypoint>();
         Waypoint waypoint = waypoints[Random.Range(0, waypoints.Length)];
 
-        while (nearCar.bounds.Contains(waypoint.transform.position) || !farCar.bounds.Contains(waypoint.transform.position) || waypoint.branches.Count == 0)
+        if (nearCar.bounds.Contains(waypoint.transform.position) || !farCar.bounds.Contains(waypoint.transform.position) || waypoint.branches.Count == 0)
         {
-            waypoints = waypointParent.GetComponentsInChildren<Waypoint>();
-            waypoint = waypoints[Random.Range(0, waypoints.Length)];
+            return null;
         }
-
-        return waypoint;
+        else
+        {
+            return waypoint;
+        }
     }
 }
