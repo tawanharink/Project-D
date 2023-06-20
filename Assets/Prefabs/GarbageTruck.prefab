@@ -1602,7 +1602,23 @@ MonoBehaviour:
     m_Id: 10660d79-7571-45ff-8c50-52f386500c93
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 22dcf2b2-c50b-4ea1-9a06-2db527633c9c
+      m_Path: <Keyboard>/c
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Switch Camera
+      m_Flags: 0
+    - m_Name: 
+      m_Id: bf5aa0a8-2664-4a29-ae70-a2d96009e6ae
+      m_Path: <XInputController>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Switch Camera
+      m_Flags: 0
     m_Flags: 0
 --- !u!1 &3078024533453062304
 GameObject:
@@ -2028,6 +2044,7 @@ MonoBehaviour:
   distance: 5
   xSpeed: 120
   ySpeed: 120
+  mouseSensitivity: 0.1
   yMinLimit: -20
   yMaxLimit: 80
 --- !u!1 &3476461174454335071
